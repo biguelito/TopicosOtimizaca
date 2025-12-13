@@ -1,0 +1,124 @@
+#  REGRAS POR ANO (PROGRAMAS INTERNOS E EXTERNOS)
+    # for turma in turmas:
+    #     ano = ano_da_turma[turma]
+
+    #     variaveis_programas = pulp.lpSum(
+    #         variavel_alocacao.get((turma, disc, professor, horario), 0)
+    #         for disc in disciplinas_programas
+    #         for professor in professores
+    #         for horario in horarios
+    #     )
+
+    #     aulas_fixas_programas = sum(
+    #         1 for (t, d, _, _) in atribuicoes_fixas
+    #         if t == turma and d in disciplinas_programas
+    #     )
+
+    #     # Ano 1: participação obrigatória em 1 programa
+    #     if ano == 1:
+    #         modelo += (
+    #             variaveis_programas + aulas_fixas_programas >= 1,
+    #             f"ano1_precisa_programa_{turma}"
+    #         )
+
+    #     # Ano 2: no máximo 1 programa externo
+    #     if ano == 2:
+    #         variaveis_programas_externos = pulp.lpSum(
+    #             variavel_alocacao.get((turma, disc, professor, horario), 0)
+    #             for disc in disciplinas_programas_externos
+    #             for professor in professores
+    #             for horario in horarios
+    #         )
+
+    #         aulas_fixas_ext = sum(
+    #             1 for (t, d, _, _) in atribuicoes_fixas
+    #             if t == turma and d in disciplinas_programas_externos
+    #         )
+
+    #         modelo += (
+    #             variaveis_programas_externos + aulas_fixas_ext <= 1,
+    #             f"ano2_limite_programa_externo_{turma}"
+    #         )
+
+    #     # Ano 3: proibido participar de programas externos
+    #     if ano == 3:
+    #         for disc in disciplinas_programas_externos:
+    #             for professor in professores:
+    #                 for horario in horarios:
+    #                     if (turma, disc, professor, horario) in variavel_alocacao:
+    #                         modelo += (
+    #                             variavel_alocacao[(turma, disc, professor, horario)] == 0,
+    #                             f"ano3_proibido_programa_externo_{turma}_{disc}_{horario}"
+    #                         )
+
+
+# def instancia_exemplo2():
+#     turmas = ["1A", "2A", "3A"]
+#     ano_turma = {"1A": 1, "2A": 2, "3A": 3}
+
+#     disciplinas = ["Matematica", "Historia", "Inovativa", "Senac", "Cesar"]
+
+#     disciplinas_programas = ["Inovativa", "Senac", "Cesar"]
+#     disciplinas_programas_externos = ["Senac", "Cesar"]
+
+#     professores = ["prof1", "prof2", "prof3", "prof4"]
+
+#     horarios = ["Seg_1", "Seg_2", "Ter_1", "Ter_2", "Qua_1"]
+
+#     quantidade_salas = 2
+
+#     professor_pode_lecionar = {
+#         ("prof1", "Matematica"): 1,
+#         ("prof1", "Historia"): 1,
+#         ("prof1", "Inovativa"): 1,
+#         ("prof2", "Matematica"): 1,
+#         ("prof2", "Historia"): 1,
+#         ("prof3", "Senac"): 1,
+#         ("prof4", "Cesar"): 1,
+#     }
+
+#     disponibilidade = {}
+#     for p in professores:
+#         for h in horarios:
+#             disponibilidade[(p, h)] = 1
+
+#     # professor 2 só trabalha de manhã
+#     for h in horarios:
+#         if h not in ["Seg_1", "Ter_1", "Qua_1"]:
+#             disponibilidade[("prof2", h)] = 0
+
+#     # prof3/prof4 só nos horários fixos
+#     for h in horarios:
+#         disponibilidade[("prof3", h)] = 0
+#         disponibilidade[("prof4", h)] = 0
+
+#     disponibilidade[("prof3", "Seg_2")] = 1
+#     disponibilidade[("prof4", "Ter_2")] = 1
+
+#     quantidade_aulas = {}
+#     for turma in turmas:
+#         quantidade_aulas[(turma, "Matematica")] = 2
+#         quantidade_aulas[(turma, "Historia")] = 2
+#         quantidade_aulas[(turma, "Inovativa")] = 0
+#         quantidade_aulas[(turma, "Senac")] = 0
+#         quantidade_aulas[(turma, "Cesar")] = 0
+
+#     atribuicoes_fixas = [
+#         ("1A", "Senac", "prof3", "Seg_2"),
+#         ("2A", "Cesar", "prof4", "Ter_2")
+#     ]
+
+#     return {
+#         "turmas": turmas,
+#         "ano_da_turma": ano_turma,
+#         "disciplinas": disciplinas,
+#         "professores": professores,
+#         "horarios": horarios,
+#         "quantidade_salas": quantidade_salas,
+#         "professor_pode_lecionar": professor_pode_lecionar,
+#         "professor_disponivel_no_horario": disponibilidade,
+#         "quantidade_aulas_requeridas": quantidade_aulas,
+#         "atribuicoes_fixas": atribuicoes_fixas,
+#         "disciplinas_programas": disciplinas_programas,
+#         "disciplinas_programas_externos": disciplinas_programas_externos,
+#     }
