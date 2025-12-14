@@ -104,8 +104,8 @@
 #         quantidade_aulas[(turma, "Cesar")] = 0
 
 #     atribuicoes_fixas = [
-#         ("1A", "Senac", "prof3", "Seg_2"),
-#         ("2A", "Cesar", "prof4", "Ter_2")
+#         ("1A", "Senac", "prof3", "Seg_2", "Sala_1"),
+#         ("2A", "Cesar", "prof4", "Ter_2", "Sala_2")
 #     ]
 
 #     return {
